@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.utils.Resource
 import com.example.githubuser.utils.Utils
+import com.example.githubuser.utils.Utils.hideLoading
+import com.example.githubuser.utils.Utils.showLoading
+import com.example.githubuser.utils.Utils.showToast
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,13 +22,12 @@ class FollowerFragment : Fragment() {
     private val viewModel: FollowerViewModel by viewModel()
     private val getUser: String? by bundle(GETUSER)
     private lateinit var followerAdapter: FollowerAdapter
-    private val utils = Utils()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentFollowerBinding.inflate(layoutInflater, container, false)
         return mbinding.root
@@ -46,17 +48,17 @@ class FollowerFragment : Fragment() {
         viewModel.followerResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    utils.showLoading(binding!!.loading)
+                    context?.showLoading(binding!!.loading)
                 }
                 is Resource.Success -> {
-                    utils.hideLoading(binding!!.loading)
+                    context?.hideLoading(binding!!.loading)
                     followerAdapter.setData(it.data!!)
                     if (it.data.isNullOrEmpty()) {
                         mbinding.tvNoDataFound.visibility = View.VISIBLE
                     }
                 }
                 is Resource.Error -> {
-                    utils.showToast(requireContext(), "Data Can't be Loaded")
+                    context?.showToast(requireContext(), "Data Can't be Loaded")
                 }
             }
         })

@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.utils.Resource
 import com.example.githubuser.utils.Utils
+import com.example.githubuser.utils.Utils.hideLoading
+import com.example.githubuser.utils.Utils.showLoading
+import com.example.githubuser.utils.Utils.showToast
 import com.example.githubuser.view.detailUser.follower.FollowerFragment
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
@@ -20,14 +23,13 @@ class FollowingFragment : Fragment() {
     private val mbinding get() = binding!!
     private val viewModel: FollowingViewModel by viewModel()
     private val getUser: String? by bundle(FollowerFragment.GETUSER)
-    private val utils = Utils()
     private lateinit var followingAdapter: FollowingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentFollowingBinding.inflate(layoutInflater, container, false)
         return mbinding.root
@@ -48,17 +50,17 @@ class FollowingFragment : Fragment() {
         viewModel.followingResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    utils.showLoading(binding!!.loading)
+                    context?.showLoading(binding!!.loading)
                 }
                 is Resource.Success -> {
-                    utils.hideLoading(binding!!.loading)
+                    context?.hideLoading(binding!!.loading)
                     followingAdapter.setData(it.data!!)
                     if (it.data.isNullOrEmpty()) {
                         mbinding.tvNoDataFound.visibility = View.VISIBLE
                     }
                 }
                 is Resource.Error -> {
-                    utils.showToast(requireContext(), "Data Can't be Loaded")
+                    context?.showToast(requireContext(), "Data Can't be Loaded")
                 }
             }
         })

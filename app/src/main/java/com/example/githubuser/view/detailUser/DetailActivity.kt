@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.data.response.DetailResponse
 import com.example.githubuser.databinding.ActivityProfileBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils
+import com.example.githubuser.utils.Utils.showToast
 import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
@@ -19,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
     private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
     private val viewModel: DetailViewModel by viewModel()
     private val getData: String? by bundle(PASSDATA)
-    private val utils = Utils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,7 @@ class DetailActivity : AppCompatActivity() {
                     setupView(it.data!!)
                 }
                 is Resource.Error -> {
-                    utils.showToast(this, "Data Can't be Loaded")
+                    showToast(this, "Data Can't be Loaded")
                 }
             }
         })

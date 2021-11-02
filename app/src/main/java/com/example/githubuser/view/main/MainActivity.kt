@@ -9,7 +9,9 @@ import androidx.viewbinding.BuildConfig
 import com.example.githubuser.data.response.SearchUserResponse
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils
+import com.example.githubuser.utils.Utils.hideLoading
+import com.example.githubuser.utils.Utils.showLoading
+import com.example.githubuser.utils.Utils.showToast
 import com.example.githubuser.view.detailUser.DetailActivity.Companion.launchDetail
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -19,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: MainViewModel by viewModel()
     private lateinit var adapterUsers: AdapterUsers
-    private val utils = Utils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,18 +64,18 @@ class MainActivity : AppCompatActivity() {
         viewModel.userSearchResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    utils.showLoading(binding.progressBar)
+                    showLoading(binding.progressBar)
                 }
                 is Resource.Success -> {
-                    utils.hideLoading(binding.progressBar)
+                    hideLoading(binding.progressBar)
                     Timber.d("${it.data}")
                     adapterUsers.setDataSearch(it.data?.items!!)
                     if (it.data.total_count == 0) {
-                        utils.showToast(this, "Data not found")
+                        showToast(this, "Data not found")
                     }
                 }
                 is Resource.Error -> {
-                    utils.showToast(this, "Data Can't be Loaded")
+                    showToast(this, "Data Can't be Loaded")
                 }
             }
         })
