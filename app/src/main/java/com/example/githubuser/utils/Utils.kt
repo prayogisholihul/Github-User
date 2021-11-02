@@ -7,7 +7,7 @@ import android.widget.Toast
 
 object Utils {
     fun Context.showToast(ctx: Context, text: String) {
-        Toast.makeText(ctx, text, Toast.LENGTH_LONG).show()
+        Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show()
     }
 
     fun Context.showLoading(view: ProgressBar) {

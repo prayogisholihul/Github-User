@@ -1,5 +1,6 @@
 package com.example.githubuser.data.api
 
+import com.example.githubuser.BuildConfig
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,15 +10,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiNetwork {
 
     private const val baseUrl = "https://api.github.com/"
-    private const val apiKey = "token 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"
+    private const val apiKey = BuildConfig.KEY
 
     fun getClient(): ApiInterface {
 
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val loggingInterceptor = if(BuildConfig.DEBUG) {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        }else {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+        }
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
+            .addInterceptor(loggingInterceptor)
             .addInterceptor {
                 val request = it.request().newBuilder()
                     .addHeader("Authorization", apiKey).build()

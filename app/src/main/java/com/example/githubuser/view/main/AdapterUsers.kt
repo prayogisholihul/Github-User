@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.data.response.SearchUserResponse
 import com.example.githubuser.databinding.FragmentAdapterUsersBinding
 import timber.log.Timber
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AdapterUsers(
     private var users: ArrayList<SearchUserResponse.Items>,
@@ -47,9 +49,11 @@ class AdapterUsers(
     class ViewHolder(val binding: FragmentAdapterUsersBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    fun setDataSearch(data: List<SearchUserResponse.Items>) {
+    fun setDataSearch(data: List<SearchUserResponse.Items>?) {
         users.clear()
-        users.addAll(data)
+        if (data != null) {
+            users.addAll(data)
+        }
         notifyDataSetChanged()
     }
 
@@ -67,7 +71,9 @@ class AdapterUsers(
                 } else {
                     val userFiltered = ArrayList<SearchUserResponse.Items>()
                     for (user in users) {
-                        if (user.login.toLowerCase().contains(charSearch.toLowerCase())) {
+                        if (user.login.lowercase(Locale.getDefault())
+                            .contains(charSearch.lowercase(Locale.getDefault()))
+                        ) {
                             userFiltered.add(user)
                         }
                     }

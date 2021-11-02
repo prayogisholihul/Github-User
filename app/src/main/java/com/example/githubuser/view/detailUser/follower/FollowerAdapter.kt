@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.data.response.FollowerResponse
 import com.example.githubuser.databinding.FragmentFollowerAdapterBinding
 
-class FollowerAdapter(var followerArrayList: ArrayList<FollowerResponse>, val context: Context) :
+class FollowerAdapter(private var followerArrayList: ArrayList<FollowerResponse>, val context: Context) :
     RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -35,7 +35,7 @@ class FollowerFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchFollower(getUser!!)
+        viewModel.fetchFollower(getUser.toString())
         setupObserver()
     }
 

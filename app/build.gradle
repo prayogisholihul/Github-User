@@ -16,6 +16,7 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "KEY", '"token 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"')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,6 +51,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.0-beta01'
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     //network
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
