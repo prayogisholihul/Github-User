@@ -1,10 +1,12 @@
-package com.example.githubuser.view.detailUser
+package com.example.githubuser.view.detail
 
 import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.example.githubuser.R
 import com.example.githubuser.data.response.DetailResponse
 import com.example.githubuser.databinding.ActivityProfileBinding
 import com.example.githubuser.utils.Resource
@@ -14,21 +16,20 @@ import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
 
-    private val binding by lazy { ActivityProfileBinding.inflate(layoutInflater) }
+    private val binding by viewBinding<ActivityProfileBinding>()
     private val viewModel: DetailViewModel by viewModel()
-    private val getData: String? by bundle(PASSDATA)
+    private val getData: String? by bundle(PASS_DATA)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
             title = "Profile Detail"
         }
-        viewModel.fetchDetailUser(getData!!)
+        viewModel.fetchDetailUser(getData.toString())
         setupObserver()
         setupTab()
     }
@@ -78,10 +79,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val PASSDATA = "USERDATA"
+        private const val PASS_DATA = "USERDATA"
 
         fun Context.launchDetail(text: String? = null) = intentOf<DetailActivity> {
-            +(PASSDATA to text)
+            +(PASS_DATA to text)
             startActivity(this@launchDetail)
         }
     }

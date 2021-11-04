@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detailUser.following
+package com.example.githubuser.view.detail.following
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils
 import com.example.githubuser.utils.Utils.hideLoading
 import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
-import com.example.githubuser.view.detailUser.follower.FollowerFragment
+import com.example.githubuser.view.detail.follower.FollowerFragment
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,7 +21,7 @@ class FollowingFragment : Fragment() {
     private var binding: FragmentFollowingBinding? = null
     private val mbinding get() = binding!!
     private val viewModel: FollowingViewModel by viewModel()
-    private val getUser: String? by bundle(FollowerFragment.GETUSER)
+    private val getUser: String? by bundle(GET_USER)
     private lateinit var followingAdapter: FollowingAdapter
 
     override fun onCreateView(
@@ -78,12 +77,12 @@ class FollowingFragment : Fragment() {
     }
 
     companion object {
-        const val GETUSER = "USER"
+        private const val GET_USER = "USER"
 
         fun passDataToFollowingFrag(text: String? = null) =
             FollowerFragment().apply {
                 arguments = intentOf {
-                    +(GETUSER to text)
+                    +(GET_USER to text)
                 }.extras
             }
     }

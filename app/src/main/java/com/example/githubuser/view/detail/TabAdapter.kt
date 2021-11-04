@@ -1,11 +1,11 @@
-package com.example.githubuser.view.detailUser
+package com.example.githubuser.view.detail
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.githubuser.view.detailUser.follower.FollowerFragment
-import com.example.githubuser.view.detailUser.following.FollowingFragment
+import com.example.githubuser.view.detail.follower.FollowerFragment
+import com.example.githubuser.view.detail.following.FollowingFragment
 
 class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, user: String) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUser">
         <activity
-            android:name=".view.detailUser.DetailActivity"
+            android:name=".view.detail.DetailActivity"
             android:exported="true" />
         <activity
             android:name=".view.main.MainActivity"

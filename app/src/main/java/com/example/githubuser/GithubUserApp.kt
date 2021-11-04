@@ -3,9 +3,9 @@ package com.example.githubuser
 import android.app.Application
 import com.example.githubuser.data.Repository
 import com.example.githubuser.data.api.ApiNetwork
-import com.example.githubuser.view.detailUser.DetailViewModel
-import com.example.githubuser.view.detailUser.follower.FollowerViewModel
-import com.example.githubuser.view.detailUser.following.FollowingViewModel
+import com.example.githubuser.view.detail.DetailViewModel
+import com.example.githubuser.view.detail.follower.FollowerViewModel
+import com.example.githubuser.view.detail.following.FollowingViewModel
 import com.example.githubuser.view.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

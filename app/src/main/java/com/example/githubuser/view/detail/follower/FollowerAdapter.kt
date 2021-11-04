@@ -1,5 +1,6 @@
-package com.example.githubuser.view.detailUser.follower
+package com.example.githubuser.view.detail.follower
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class FollowerAdapter(private var followerArrayList: ArrayList<FollowerResponse>
     class ViewHolder(val binding: FragmentFollowerAdapterBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<FollowerResponse>) {
         followerArrayList.clear()
         followerArrayList.addAll(data)

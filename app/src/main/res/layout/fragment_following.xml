@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.detailUser.following.FollowingFragment">
+    tools:context=".view.detail.following.FollowingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFollower"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="100dp"
         android:textAlignment="center"
-        android:text="NO DATA FOUND"
+        android:text="@string/no_data_found"
         android:visibility="gone"
         tools:visibility="visible" />
 

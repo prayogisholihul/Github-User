@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.detailUser.DetailActivity"
+    tools:context=".view.detail.DetailActivity"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="?attr/cardBackgroundColor"
                 app:cardCornerRadius="25dp"
                 app:contentPadding="12dp">
 
@@ -41,14 +41,15 @@
                         android:layout_marginBottom="12dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/image_load" />
+                        android:src="@drawable/image_load"
+                        android:contentDescription="@string/profilePict" />
 
                     <TextView
                         android:id="@+id/profileName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Username"
+                        tools:text="Username"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -57,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:paddingTop="6dp"
-                        android:text="Full Name"
+                        tools:text="Full Name"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
@@ -77,12 +78,12 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Follower" />
+                android:text="@string/follower_label" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Following" />
+                android:text="@string/following_label" />
 
         </com.google.android.material.tabs.TabLayout>
 

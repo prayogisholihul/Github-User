@@ -6,4 +6,7 @@
     <string name="favorite">favorite</string>
     <string name="dark_theme">dark theme</string>
     <string name="profilePict">profilePict</string>
+    <string name="follower_label">Follower</string>
+    <string name="following_label">Following</string>
+    <string name="no_data_found">NO DATA FOUND</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detailUser.follower
+package com.example.githubuser.view.detail.follower
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

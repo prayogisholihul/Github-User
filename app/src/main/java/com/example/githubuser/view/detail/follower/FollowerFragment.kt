@@ -1,4 +1,4 @@
-package com.example.githubuser.view.detailUser.follower
+package com.example.githubuser.view.detail.follower
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils
 import com.example.githubuser.utils.Utils.hideLoading
 import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
@@ -20,7 +19,7 @@ class FollowerFragment : Fragment() {
     private var binding: FragmentFollowerBinding? = null
     private val mbinding get() = binding!!
     private val viewModel: FollowerViewModel by viewModel()
-    private val getUser: String? by bundle(GETUSER)
+    private val getUser: String? by bundle(GET_USER)
     private lateinit var followerAdapter: FollowerAdapter
 
     override fun onCreateView(
@@ -76,12 +75,12 @@ class FollowerFragment : Fragment() {
     }
 
     companion object {
-        const val GETUSER = "USER"
+        private const val GET_USER = "USER"
 
         fun passDataToFollowerFrag(text: String? = null) =
             FollowerFragment().apply {
                 arguments = intentOf {
-                    +(GETUSER to text)
+                    +(GET_USER to text)
                 }.extras
             }
     }

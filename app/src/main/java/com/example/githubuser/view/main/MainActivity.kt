@@ -19,7 +19,7 @@ import com.example.githubuser.utils.Resource
 import com.example.githubuser.utils.Utils.hideLoading
 import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
-import com.example.githubuser.view.detailUser.DetailActivity.Companion.launchDetail
+import com.example.githubuser.view.detail.DetailActivity.Companion.launchDetail
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
