@@ -10,7 +10,7 @@ import com.example.githubuser.view.detail.following.FollowingFragment
 class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, user: String) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    private val getdata = user
+    private val getData = user
 
     private val fragments: ArrayList<Fragment> = arrayListOf(
         FollowerFragment(),
@@ -23,8 +23,8 @@ class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, user: S
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> FollowerFragment.passDataToFollowerFrag(getdata)
-            else -> FollowingFragment.passDataToFollowingFrag(getdata)
+            0 -> FollowerFragment.passDataToFollowerFrag(getData)
+            else -> FollowingFragment.passDataToFollowingFrag(getData)
         }
     }
 }

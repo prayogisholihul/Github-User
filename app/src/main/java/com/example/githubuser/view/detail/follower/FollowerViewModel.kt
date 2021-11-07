@@ -9,13 +9,13 @@ import com.example.githubuser.utils.Resource
 import kotlinx.coroutines.launch
 
 class FollowerViewModel(private val repository: Repository) : ViewModel() {
-    var followerResponse = MutableLiveData<Resource<List<FollowerResponse>>>()
+    var followerResponse = MutableLiveData<Resource<List<FollowerResponse>?>>()
 
     fun fetchFollower(user: String) = viewModelScope.launch {
         followerResponse.value = Resource.Loading()
         try {
             val response = repository.getFollower(user)
-            followerResponse.value = Resource.Success(response.body()!!)
+            followerResponse.value = Resource.Success(response.body())
         } catch (e: Exception) {
             followerResponse.value = Resource.Error(e.message.toString())
         }

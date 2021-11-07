@@ -1,6 +1,9 @@
 package com.example.githubuser.data.api
 
-import com.example.githubuser.data.response.*
+import com.example.githubuser.data.response.DetailResponse
+import com.example.githubuser.data.response.FollowerResponse
+import com.example.githubuser.data.response.FollowingResponse
+import com.example.githubuser.data.response.SearchUserResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

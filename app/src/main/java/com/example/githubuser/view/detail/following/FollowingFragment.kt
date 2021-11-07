@@ -1,11 +1,11 @@
 package com.example.githubuser.view.detail.following
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.utils.Resource
 import com.example.githubuser.utils.Utils.hideLoading
@@ -16,23 +16,12 @@ import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FollowingFragment : Fragment() {
+class FollowingFragment : Fragment(R.layout.fragment_following) {
 
-    private var binding: FragmentFollowingBinding? = null
-    private val mbinding get() = binding!!
+    private val binding by viewBinding<FragmentFollowingBinding>()
     private val viewModel: FollowingViewModel by viewModel()
     private val getUser: String? by bundle(GET_USER)
     private lateinit var followingAdapter: FollowingAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentFollowingBinding.inflate(layoutInflater, container, false)
-        return mbinding.root
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,17 +38,17 @@ class FollowingFragment : Fragment() {
         viewModel.followingResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    context?.showLoading(binding!!.loading)
+                    showLoading(binding.loading)
                 }
                 is Resource.Success -> {
-                    context?.hideLoading(binding!!.loading)
-                    followingAdapter.setData(it.data!!)
+                    hideLoading(binding.loading)
+                    followingAdapter.setData(it.data)
                     if (it.data.isNullOrEmpty()) {
-                        mbinding.tvNoDataFound.visibility = View.VISIBLE
+                        binding.tvNoDataFound.visibility = View.VISIBLE
                     }
                 }
                 is Resource.Error -> {
-                    context?.showToast(requireContext(), "Data Can't be Loaded")
+                    showToast(requireContext(), "Data Can't be Loaded")
                 }
             }
         })
@@ -70,7 +59,7 @@ class FollowingFragment : Fragment() {
             arrayListOf(), requireContext(),
         )
 
-        mbinding.rvFollower.apply {
+        binding.rvFollower.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = followingAdapter
         }

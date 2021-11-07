@@ -27,7 +27,7 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
-            title = "Profile Detail"
+            title = getString(R.string.profile_detail_label)
         }
         viewModel.fetchDetailUser(getData.toString())
         setupObserver()
@@ -40,7 +40,7 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    setupView(it.data!!)
+                    setupView(it.data)
                 }
                 is Resource.Error -> {
                     showToast(this, "Data Can't be Loaded")
@@ -49,20 +49,21 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
         })
     }
 
-    private fun setupView(data: DetailResponse) {
+    private fun setupView(data: DetailResponse?) {
         binding.apply {
             Glide.with(this@DetailActivity)
-                .load(data.avatar_url)
+                .load(data?.avatarUrl)
                 .circleCrop()
                 .into(profilePicture)
 
-            profileName.text = data.login
-            profileFullName.text = data.name
+            profileName.text = data?.login
+            profileFullName.text = data?.name
         }
     }
 
     private fun setupTab() {
-        val tabTitles = arrayOf("Follower", "Following")
+        val tabTitles =
+            arrayOf(getString(R.string.follower_label), getString(R.string.following_label))
         val tabAdapter = TabAdapter(supportFragmentManager, lifecycle, getData!!)
         binding.viewPager.adapter = tabAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->

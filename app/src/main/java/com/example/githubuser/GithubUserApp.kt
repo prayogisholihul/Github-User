@@ -37,7 +37,7 @@ class GithubUserApp : Application() {
     }
 
     private val repo = module {
-        single { Repository(get()) }
+        single { Repository(get(), get()) }
     }
 
     override fun onCreate() {

@@ -10,7 +10,6 @@
         android:checkable="true"/>
 
     <item
-        android:id="@+id/follow"
         android:icon="@drawable/ic_favorite"
         android:title="@string/favorite"
         app:showAsAction="ifRoom" />

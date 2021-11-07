@@ -1,5 +1,6 @@
 package com.example.githubuser.view.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,11 +32,11 @@ class AdapterUsers(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val userToView = usersFilter[position]
         holder.binding.username.text = userToView.login
-        holder.binding.nodeId.text = userToView.node_id
+        holder.binding.nodeId.text = userToView.nodeId
 
         // Picture
         Glide.with(context)
-            .load(userToView.avatar_url)
+            .load(userToView.avatarUrl)
             .circleCrop()
             .into(holder.binding.imageView)
 
@@ -49,6 +50,7 @@ class AdapterUsers(
     class ViewHolder(val binding: FragmentAdapterUsersBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setDataSearch(data: List<SearchUserResponse.Items>?) {
         users.clear()
         if (data != null) {
@@ -84,6 +86,7 @@ class AdapterUsers(
                 return userFilteredResult
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 usersFilter = results?.values as ArrayList<SearchUserResponse.Items>

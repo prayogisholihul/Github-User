@@ -6,15 +6,15 @@ import android.widget.ProgressBar
 import android.widget.Toast
 
 object Utils {
-    fun Context.showToast(ctx: Context, text: String) {
+    fun showToast(ctx: Context, text: String) {
         Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun Context.showLoading(view: ProgressBar) {
+    fun showLoading(view: ProgressBar) {
         view.visibility = View.VISIBLE
     }
 
-    fun Context.hideLoading(view: ProgressBar) {
+    fun hideLoading(view: ProgressBar) {
         view.visibility = View.GONE
     }
 }

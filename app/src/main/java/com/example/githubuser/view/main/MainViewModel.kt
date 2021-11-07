@@ -14,9 +14,9 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: Repository, application: Application) :
     AndroidViewModel(application) {
-    private val _userSearchResponse: MutableLiveData<Resource<SearchUserResponse>> =
+    private val _userSearchResponse: MutableLiveData<Resource<SearchUserResponse?>> =
         MutableLiveData()
-    var userSearch: LiveData<Resource<SearchUserResponse>> = _userSearchResponse
+    var userSearch: LiveData<Resource<SearchUserResponse?>> = _userSearchResponse
 
     init {
         fetchSearchUser("")
@@ -26,7 +26,7 @@ class MainViewModel(private val repository: Repository, application: Application
         _userSearchResponse.postValue(Resource.Loading())
         try {
             val response = repository.getSearch(user)
-            _userSearchResponse.postValue(Resource.Success(response.body()!!))
+            _userSearchResponse.postValue(Resource.Success(response.body()))
         } catch (e: Exception) {
             _userSearchResponse.postValue(Resource.Error(e.message.toString()))
         }

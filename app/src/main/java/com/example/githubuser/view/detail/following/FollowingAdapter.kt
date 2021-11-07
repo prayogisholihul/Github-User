@@ -27,12 +27,12 @@ class FollowingAdapter(private var followingArrayList: ArrayList<FollowingRespon
 
         holder.binding.apply {
             Glide.with(context)
-                .load(following.avatar_url)
+                .load(following.avatarUrl)
                 .circleCrop()
                 .into(imageView)
 
             username.text = following.login
-            nodeId.text = following.node_id
+            nodeId.text = following.nodeId
         }
     }
 
@@ -42,9 +42,11 @@ class FollowingAdapter(private var followingArrayList: ArrayList<FollowingRespon
         RecyclerView.ViewHolder(binding.root)
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(data: List<FollowingResponse>) {
+    fun setData(data: List<FollowingResponse>?) {
         followingArrayList.clear()
-        followingArrayList.addAll(data)
+        if (data != null) {
+            followingArrayList.addAll(data)
+        }
         notifyDataSetChanged()
     }
 }

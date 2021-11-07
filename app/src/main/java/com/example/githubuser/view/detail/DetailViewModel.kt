@@ -9,13 +9,13 @@ import com.example.githubuser.utils.Resource
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: Repository) : ViewModel() {
-    var detailResponse = MutableLiveData<Resource<DetailResponse>>()
+    var detailResponse = MutableLiveData<Resource<DetailResponse?>>()
 
     fun fetchDetailUser(user: String) = viewModelScope.launch {
         detailResponse.value = Resource.Loading()
         try {
             val response = repository.getDetail(user)
-            detailResponse.value = Resource.Success(response.body()!!)
+            detailResponse.value = Resource.Success(response.body())
         } catch (e: Exception) {
             detailResponse.value = Resource.Error(e.message.toString())
         }
