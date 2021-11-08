@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.data.response.FollowerResponse
-import com.example.githubuser.databinding.FragmentFollowerAdapterBinding
+import com.example.githubuser.databinding.FragmentAdapterUsersBinding
 
-class FollowerAdapter(private var followerArrayList: ArrayList<FollowerResponse>, val context: Context) :
+class FollowerAdapter(
+    private var followerArrayList: ArrayList<FollowerResponse>,
+    private val context: Context
+) :
     RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            FragmentFollowerAdapterBinding.inflate(
+            FragmentAdapterUsersBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -27,18 +30,18 @@ class FollowerAdapter(private var followerArrayList: ArrayList<FollowerResponse>
 
         holder.binding.apply {
             Glide.with(context)
-                .load(follower.avatarUrl)
+                .load(follower.avatar_url)
                 .circleCrop()
                 .into(imageView)
 
             username.text = follower.login
-            nodeId.text = follower.nodeId
+            nodeId.text = follower.node_id
         }
     }
 
     override fun getItemCount() = followerArrayList.size
 
-    class ViewHolder(val binding: FragmentFollowerAdapterBinding) :
+    class ViewHolder(val binding: FragmentAdapterUsersBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     @SuppressLint("NotifyDataSetChanged")

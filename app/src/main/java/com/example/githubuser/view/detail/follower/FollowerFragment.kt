@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.githubuser.R
-import com.example.githubuser.databinding.FragmentFollowerBinding
+import com.example.githubuser.databinding.FragmentFollowerAndFollowingBinding
 import com.example.githubuser.utils.Resource
 import com.example.githubuser.utils.Utils.hideLoading
 import com.example.githubuser.utils.Utils.showLoading
@@ -15,8 +15,8 @@ import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FollowerFragment : Fragment(R.layout.fragment_follower) {
-    private val binding by viewBinding<FragmentFollowerBinding>()
+class FollowerFragment : Fragment(R.layout.fragment_follower_and_following) {
+    private val binding by viewBinding<FragmentFollowerAndFollowingBinding>()
     private val viewModel: FollowerViewModel by viewModel()
     private val getUser: String? by bundle(GET_USER)
     private lateinit var followerAdapter: FollowerAdapter
@@ -57,7 +57,7 @@ class FollowerFragment : Fragment(R.layout.fragment_follower) {
             arrayListOf(), requireContext(),
         )
 
-        binding.rvFollower.apply {
+        binding.rvList.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = followerAdapter
         }

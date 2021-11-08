@@ -3,6 +3,7 @@ package com.example.githubuser
 import android.app.Application
 import com.example.githubuser.data.Repository
 import com.example.githubuser.data.api.ApiNetwork
+import com.example.githubuser.data.database.UserRoomDatabase
 import com.example.githubuser.view.detail.DetailViewModel
 import com.example.githubuser.view.detail.follower.FollowerViewModel
 import com.example.githubuser.view.detail.following.FollowingViewModel
@@ -30,14 +31,16 @@ class GithubUserApp : Application() {
         }
     }
 
-    private val api = module {
+    private val single = module {
         single {
             ApiNetwork.getClient()
         }
-    }
 
-    private val repo = module {
         single { Repository(get(), get()) }
+
+        single {
+            UserRoomDatabase(get())
+        }
     }
 
     override fun onCreate() {
@@ -46,7 +49,7 @@ class GithubUserApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@GithubUserApp)
-            modules(listOf(viewModelModule, api, repo))
+            modules(listOf(viewModelModule, single))
         }
     }
 }

@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Github User</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="github_search">Masukkan Nama User Github</string>
     <string name="favorite">favorite</string>
+    <string name="favorite_title">Favorite</string>
     <string name="dark_theme">dark theme</string>
     <string name="profilePict">profilePict</string>
     <string name="follower_label">Follower</string>
     <string name="following_label">Following</string>
     <string name="no_data_found">NO DATA FOUND</string>
+    <string name="no_data">NO DATA</string>
     <string name="profile_detail_label">Profile Detail</string>
+    <string name="fab_favorite">fab Favorite</string>
 </resources>

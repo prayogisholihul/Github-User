@@ -17,4 +17,12 @@ object Utils {
     fun hideLoading(view: ProgressBar) {
         view.visibility = View.GONE
     }
+
+    fun viewVisible(view: View) {
+        view.visibility = View.VISIBLE
+    }
+
+    fun viewGone(view: View) {
+        view.visibility = View.GONE
+    }
 }

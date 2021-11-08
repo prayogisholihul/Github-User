@@ -19,7 +19,9 @@ import com.example.githubuser.utils.Resource
 import com.example.githubuser.utils.Utils.hideLoading
 import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
+import com.example.githubuser.utils.Utils.viewGone
 import com.example.githubuser.view.detail.DetailActivity.Companion.launchDetail
+import com.example.githubuser.view.favorite.FavoriteActivity.Companion.launchFavorite
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -74,9 +76,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         viewModel.userSearch.observe(this, {
             when (it) {
                 is Resource.Loading -> {
+                    viewGone(binding.tvNoDataFound)
                     showLoading(binding.progressBar)
                 }
                 is Resource.Success -> {
+                    viewGone(binding.tvNoDataFound)
                     hideLoading(binding.progressBar)
                     Timber.d("${it.data}")
                     adapterUsers.setDataSearch(it.data?.items)
@@ -108,6 +112,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             R.id.theme -> {
                 item.isChecked = !item.isChecked
                 setUIMode(item, item.isChecked)
+                true
+            }
+            R.id.favorite -> {
+                this.launchFavorite()
                 true
             }
             else -> super.onOptionsItemSelected(item)

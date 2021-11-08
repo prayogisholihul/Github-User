@@ -32,11 +32,11 @@ class AdapterUsers(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val userToView = usersFilter[position]
         holder.binding.username.text = userToView.login
-        holder.binding.nodeId.text = userToView.nodeId
+        holder.binding.nodeId.text = userToView.node_id
 
         // Picture
         Glide.with(context)
-            .load(userToView.avatarUrl)
+            .load(userToView.avatar_url)
             .circleCrop()
             .into(holder.binding.imageView)
 

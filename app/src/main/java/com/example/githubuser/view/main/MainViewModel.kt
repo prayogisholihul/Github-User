@@ -18,10 +18,6 @@ class MainViewModel(private val repository: Repository, application: Application
         MutableLiveData()
     var userSearch: LiveData<Resource<SearchUserResponse?>> = _userSearchResponse
 
-    init {
-        fetchSearchUser("")
-    }
-
     fun fetchSearchUser(user: String) = viewModelScope.launch {
         _userSearchResponse.postValue(Resource.Loading())
         try {

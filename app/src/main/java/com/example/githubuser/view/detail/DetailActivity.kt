@@ -10,6 +10,8 @@ import com.example.githubuser.R
 import com.example.githubuser.data.response.DetailResponse
 import com.example.githubuser.databinding.ActivityProfileBinding
 import com.example.githubuser.utils.Resource
+import com.example.githubuser.utils.Utils.hideLoading
+import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
 import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.bundler.bundle
@@ -38,9 +40,12 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
         viewModel.detailResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
+                    showLoading(binding.loading)
                 }
                 is Resource.Success -> {
+                    hideLoading(binding.loading)
                     setupView(it.data)
+                    favoriteClick(it.data)
                 }
                 is Resource.Error -> {
                     showToast(this, "Data Can't be Loaded")
@@ -52,7 +57,7 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
     private fun setupView(data: DetailResponse?) {
         binding.apply {
             Glide.with(this@DetailActivity)
-                .load(data?.avatarUrl)
+                .load(data?.avatar_url)
                 .circleCrop()
                 .into(profilePicture)
 
@@ -69,6 +74,15 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabTitles[position]
         }.attach()
+    }
+
+    private fun favoriteClick(data: DetailResponse?) = with(binding) {
+        fabFavorite.setOnClickListener {
+            if (data != null) {
+                viewModel.insert(data)
+                showToast(this@DetailActivity, "Added To Favorite")
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
