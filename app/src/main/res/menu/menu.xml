@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_dark"
         android:title="@string/dark_theme"
         app:showAsAction="ifRoom"
-        android:checkable="true"/>
+        android:checkable="true" />
 
     <item
         android:id="@+id/favorite"

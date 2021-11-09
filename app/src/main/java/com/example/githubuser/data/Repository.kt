@@ -15,9 +15,9 @@ class Repository(
 
     // RoomDatabase
 
-    fun insert(user: User) = db.userDao().insert(user)
+    suspend fun insert(user: User) = db.userDao().insert(user)
 
-    fun delete(user: User) = db.userDao().delete(user)
+    suspend fun delete(user: User) = db.userDao().delete(user)
 
     fun getAllUsers() = db.userDao().getAllUsers()
 

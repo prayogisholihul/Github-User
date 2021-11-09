@@ -74,7 +74,7 @@ class AdapterUsers(
                     val userFiltered = ArrayList<SearchUserResponse.Items>()
                     for (user in users) {
                         if (user.login.lowercase(Locale.getDefault())
-                            .contains(charSearch.lowercase(Locale.getDefault()))
+                                .contains(charSearch.lowercase(Locale.getDefault()))
                         ) {
                             userFiltered.add(user)
                         }

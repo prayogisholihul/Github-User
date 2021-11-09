@@ -42,14 +42,14 @@ class FavoriteActivity : AppCompatActivity(R.layout.activity_favorite) {
     }
 
     private fun setRV(userList: List<User>) {
-            adapter = FavoriteAdapter(arrayListOf(), this, object : FavoriteAdapter.OnAdapterListener {
-                override fun onClick(result: User) {
-                    this@FavoriteActivity.launchDetail(result.login)
-                }
-            })
-            binding.rvList.layoutManager = LinearLayoutManager(this)
-            binding.rvList.adapter = adapter
-            adapter.setData(userList)
+        adapter = FavoriteAdapter(arrayListOf(), this, object : FavoriteAdapter.OnAdapterListener {
+            override fun onClick(result: User) {
+                this@FavoriteActivity.launchDetail(result.login)
+            }
+        })
+        binding.rvList.layoutManager = LinearLayoutManager(this)
+        binding.rvList.adapter = adapter
+        adapter.setData(userList)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,11 +1,9 @@
 package com.example.githubuser.view.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubuser.data.Repository
-import com.example.githubuser.data.database.User
 import com.example.githubuser.data.response.DetailResponse
 import com.example.githubuser.utils.Resource
 import kotlinx.coroutines.launch

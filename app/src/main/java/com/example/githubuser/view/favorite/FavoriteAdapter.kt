@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.data.database.User
-import com.example.githubuser.data.response.SearchUserResponse
 import com.example.githubuser.databinding.FragmentAdapterUsersBinding
-import com.example.githubuser.view.main.AdapterUsers
 
 class FavoriteAdapter(
     private var users: ArrayList<User>,

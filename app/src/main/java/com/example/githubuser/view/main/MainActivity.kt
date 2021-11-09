@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewbinding.BuildConfig
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.githubuser.R
 import com.example.githubuser.data.response.SearchUserResponse

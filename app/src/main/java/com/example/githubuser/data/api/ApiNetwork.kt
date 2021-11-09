@@ -14,9 +14,9 @@ object ApiNetwork {
 
     fun getClient(): ApiInterface {
 
-        val loggingInterceptor = if(BuildConfig.DEBUG) {
+        val loggingInterceptor = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        }else {
+        } else {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
 
