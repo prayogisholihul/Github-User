@@ -10,14 +10,6 @@ object Utils {
         Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun showLoading(view: ProgressBar) {
-        view.visibility = View.VISIBLE
-    }
-
-    fun hideLoading(view: ProgressBar) {
-        view.visibility = View.GONE
-    }
-
     fun viewVisible(view: View) {
         view.visibility = View.VISIBLE
     }

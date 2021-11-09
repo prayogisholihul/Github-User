@@ -15,17 +15,11 @@ class Repository(
 
     // RoomDatabase
 
-    fun insert(user: User) {
-        db.userDao().insert(user)
-    }
+    fun insert(user: User) = db.userDao().insert(user)
 
-    fun delete(user: User) {
-        db.userDao().delete(user)
-    }
-
-    fun update(user: User) {
-        db.userDao().update(user)
-    }
+    fun delete(user: User) = db.userDao().delete(user)
 
     fun getAllUsers() = db.userDao().getAllUsers()
+
+    fun getUserById(id: String) = db.userDao().getUserByID(id)
 }

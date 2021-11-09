@@ -8,9 +8,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.githubuser.R
 import com.example.githubuser.databinding.FragmentFollowerAndFollowingBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils.hideLoading
-import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
+import com.example.githubuser.utils.Utils.viewGone
+import com.example.githubuser.utils.Utils.viewVisible
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,10 +36,10 @@ class FollowerFragment : Fragment(R.layout.fragment_follower_and_following) {
         viewModel.followerResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    showLoading(binding.loading)
+                    viewVisible(binding.loading)
                 }
                 is Resource.Success -> {
-                    hideLoading(binding.loading)
+                    viewGone(binding.loading)
                     followerAdapter.setData(it.data)
                     if (it.data.isNullOrEmpty()) {
                         binding.tvNoDataFound.visibility = View.VISIBLE

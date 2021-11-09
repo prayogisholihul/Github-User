@@ -7,16 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.githubuser.R
+import com.example.githubuser.data.database.User
 import com.example.githubuser.databinding.ActivityFavoriteBinding
 import com.example.githubuser.utils.Utils.viewGone
 import com.example.githubuser.utils.Utils.viewVisible
-import com.example.githubuser.view.detail.DetailViewModel
+import com.example.githubuser.view.detail.DetailActivity.Companion.launchDetail
 import com.skydoves.bundler.intentOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteActivity : AppCompatActivity(R.layout.activity_favorite) {
     private val binding by viewBinding<ActivityFavoriteBinding>()
-    private val viewModel: DetailViewModel by viewModel()
+    private val viewModel: FavoriteViewModel by viewModel()
     private lateinit var adapter: FavoriteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,11 +28,6 @@ class FavoriteActivity : AppCompatActivity(R.layout.activity_favorite) {
             title = getString(R.string.favorite_title)
         }
         setObserver()
-        setupRV()
-    }
-
-    private fun setupRV() {
-
     }
 
     private fun setObserver() {
@@ -40,12 +36,20 @@ class FavoriteActivity : AppCompatActivity(R.layout.activity_favorite) {
                 viewVisible(binding.tvNoDataFound)
             } else {
                 viewGone(binding.tvNoDataFound)
-                adapter = FavoriteAdapter(arrayListOf(), this)
-                binding.rvList.layoutManager = LinearLayoutManager(this)
-                binding.rvList.adapter = adapter
-                adapter.setData(userList)
+                setRV(userList)
             }
         })
+    }
+
+    private fun setRV(userList: List<User>) {
+            adapter = FavoriteAdapter(arrayListOf(), this, object : FavoriteAdapter.OnAdapterListener {
+                override fun onClick(result: User) {
+                    this@FavoriteActivity.launchDetail(result.login)
+                }
+            })
+            binding.rvList.layoutManager = LinearLayoutManager(this)
+            binding.rvList.adapter = adapter
+            adapter.setData(userList)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

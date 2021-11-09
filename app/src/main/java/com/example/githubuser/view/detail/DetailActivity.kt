@@ -10,9 +10,10 @@ import com.example.githubuser.R
 import com.example.githubuser.data.response.DetailResponse
 import com.example.githubuser.databinding.ActivityProfileBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils.hideLoading
-import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
+import com.example.githubuser.utils.Utils.viewGone
+import com.example.githubuser.utils.Utils.viewVisible
+import com.example.githubuser.view.favorite.FavoriteViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
@@ -22,6 +23,7 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
 
     private val binding by viewBinding<ActivityProfileBinding>()
     private val viewModel: DetailViewModel by viewModel()
+    private val viewModelFavorite: FavoriteViewModel by viewModel()
     private val getData: String? by bundle(PASS_DATA)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +42,11 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
         viewModel.detailResponse.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    showLoading(binding.loading)
+                    viewVisible(binding.loading)
                 }
                 is Resource.Success -> {
-                    hideLoading(binding.loading)
+                    viewGone(binding.loading)
+                    viewVisible(binding.fabFavorite)
                     setupView(it.data)
                     favoriteClick(it.data)
                 }
@@ -77,12 +80,21 @@ class DetailActivity : AppCompatActivity(R.layout.activity_profile) {
     }
 
     private fun favoriteClick(data: DetailResponse?) = with(binding) {
-        fabFavorite.setOnClickListener {
-            if (data != null) {
-                viewModel.insert(data)
-                showToast(this@DetailActivity, "Added To Favorite")
+        viewModelFavorite.getUserById(data?.id.toString()).observe(this@DetailActivity, { User ->
+            if (data?.id == User?.id) {
+                fabFavorite.setImageResource(R.drawable.ic_favorite_clicked)
+                fabFavorite.setOnClickListener {
+                    viewModelFavorite.delete(User)
+                    showToast(this@DetailActivity, "Deleted From Favorite")
+                }
+            } else {
+                fabFavorite.setImageResource(R.drawable.ic_favorite_default)
+                fabFavorite.setOnClickListener {
+                    viewModelFavorite.insert(data)
+                    showToast(this@DetailActivity, "Added To Favorite")
+                }
             }
-        }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

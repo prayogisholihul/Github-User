@@ -6,15 +6,15 @@ import androidx.room.*
 @Dao
 interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)
-
-    @Update
-    fun update(user: User)
 
     @Delete
     fun delete(user: User)
 
     @Query("SELECT * from user")
     fun getAllUsers(): LiveData<List<User>>
+
+    @Query("SELECT * from user WHERE id=:id")
+    fun getUserByID(id: String): LiveData<User>
 }

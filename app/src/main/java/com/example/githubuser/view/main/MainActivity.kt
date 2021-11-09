@@ -16,10 +16,9 @@ import com.example.githubuser.R
 import com.example.githubuser.data.response.SearchUserResponse
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.utils.Resource
-import com.example.githubuser.utils.Utils.hideLoading
-import com.example.githubuser.utils.Utils.showLoading
 import com.example.githubuser.utils.Utils.showToast
 import com.example.githubuser.utils.Utils.viewGone
+import com.example.githubuser.utils.Utils.viewVisible
 import com.example.githubuser.view.detail.DetailActivity.Companion.launchDetail
 import com.example.githubuser.view.favorite.FavoriteActivity.Companion.launchFavorite
 import kotlinx.coroutines.flow.first
@@ -35,9 +34,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
         setupObserver()
         setupListener()
         setupView()
@@ -77,11 +73,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             when (it) {
                 is Resource.Loading -> {
                     viewGone(binding.tvNoDataFound)
-                    showLoading(binding.progressBar)
+                    viewVisible(binding.progressBar)
                 }
                 is Resource.Success -> {
                     viewGone(binding.tvNoDataFound)
-                    hideLoading(binding.progressBar)
+                    viewGone(binding.progressBar)
                     Timber.d("${it.data}")
                     adapterUsers.setDataSearch(it.data?.items)
                     if (it.data?.total_count == 0) {
