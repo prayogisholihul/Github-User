@@ -34,7 +34,9 @@ class FavoriteActivity : AppCompatActivity(R.layout.activity_favorite) {
         viewModel.getAllNotes().observe(this, { userList ->
             if (userList.isNullOrEmpty()) {
                 viewVisible(binding.tvNoDataFound)
+                viewGone(binding.rvList)
             } else {
+                viewVisible(binding.rvList)
                 viewGone(binding.tvNoDataFound)
                 setRV(userList)
             }

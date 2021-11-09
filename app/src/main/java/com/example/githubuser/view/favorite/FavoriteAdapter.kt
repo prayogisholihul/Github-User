@@ -1,5 +1,6 @@
 package com.example.githubuser.view.favorite
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -50,11 +51,10 @@ class FavoriteAdapter(
     inner class ViewHolder(val binding: FragmentAdapterUsersBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(listUsers: List<User>) {
-        val diffCallback = UserDiffCallback(users, listUsers)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
         users.clear()
         users.addAll(listUsers)
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 }
